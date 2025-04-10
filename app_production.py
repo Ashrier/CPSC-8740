@@ -44,59 +44,59 @@ try:
 
     # Load preprocessed movie data
     # Use the final preprocessed CSV that includes necessary columns
-    #movies_df = pd.read_csv("neural_net_ready_preprocessed_movies.csv") # Make sure path is correct
+    movies_df = pd.read_csv("neural_net_ready_preprocessed_movies.csv") # Make sure path is correct
 
     # --- Recreate/Load necessary feature columns for prediction ---
     # (Do this once at startup)
-    #if 'Director_Encoded' not in movies_df.columns:
-         #movies_df['Director_Encoded'] = director_encoder.transform(movies_df['Director'])
+    if 'Director_Encoded' not in movies_df.columns:
+         movies_df['Director_Encoded'] = director_encoder.transform(movies_df['Director'])
 
     # Assuming title_data (padded_sequences) is needed and not in CSV
-    #sequences = title_tokenizer.texts_to_sequences(movies_df['Title'])
-    #all_title_data = pad_sequences(sequences, maxlen=20) # Assign to variable
+    sequences = title_tokenizer.texts_to_sequences(movies_df['Title'])
+    all_title_data = pad_sequences(sequences, maxlen=20) # Assign to variable
 
     # Assuming star_cast_encoded is needed and not in CSV
     # Ensure 'Star Cast List Clean' column exists or recreate it first
-    #if 'Star Cast List Clean' not in movies_df.columns:
+    if 'Star Cast List Clean' not in movies_df.columns:
         # You might need more preprocessing steps here if this column isn't saved
-        #raise ValueError("Column 'Star Cast List Clean' not found in preprocessed CSV.")
+        raise ValueError("Column 'Star Cast List Clean' not found in preprocessed CSV.")
         # If it is saved but as a string:
         # movies_df['Star Cast List Clean'] = movies_df['Star Cast List Clean'].apply(eval)
 
-    #all_star_cast_data = np.zeros((len(movies_df), len(all_actors)))
-    #for i, actors in enumerate(movies_df['Star Cast List Clean']):
+    all_star_cast_data = np.zeros((len(movies_df), len(all_actors)))
+    for i, actors in enumerate(movies_df['Star Cast List Clean']):
          # Handle cases where actors might not be a list (e.g., NaN or needs eval)
-         #if isinstance(actors, list):
-             #for actor in actors:
-                 #if actor in actor_to_index:
-                     #index = actor_to_index[actor]
-                     #all_star_cast_data[i, index] = 1
+         if isinstance(actors, list):
+             for actor in actors:
+                 if actor in actor_to_index:
+                     index = actor_to_index[actor]
+                     all_star_cast_data[i, index] = 1
 
     # Prepare other features
-    #all_numerical_data = movies_df[['IMDb Rating', 'Duration (minutes)', 'Year']].values
-    #all_director_data = movies_df['Director_Encoded'].values
-    #all_genre_data = movies_df[genre_columns].values # Use loaded genre columns
+    all_numerical_data = movies_df[['IMDb Rating', 'Duration (minutes)', 'Year']].values
+    all_director_data = movies_df['Director_Encoded'].values
+    all_genre_data = movies_df[genre_columns].values # Use loaded genre columns
 
-    #num_movies = len(movies_df)
+    num_movies = len(movies_df)
 
     # --- Calculate Base Predictions using Generic User ID (ONCE) ---
     print("Calculating base predictions...")
-    #generic_user_id = 0
-    #generic_user_array = np.array([generic_user_id] * num_movies)
-    #movie_id_array = np.arange(num_movies) # Assuming movie embedding uses index
+    generic_user_id = 0
+    generic_user_array = np.array([generic_user_id] * num_movies)
+    movie_id_array = np.arange(num_movies) # Assuming movie embedding uses index
 
     # Ensure features are in the correct order for model.predict
-    #base_predictions = model.predict([
-        #generic_user_array,
-        #movie_id_array,
-        #all_numerical_data,
-        #all_director_data,
-        #all_genre_data,
-        #all_star_cast_data,
-        #all_title_data
-    #])
+    base_predictions = model.predict([
+        generic_user_array,
+        movie_id_array,
+        all_numerical_data,
+        all_director_data,
+        all_genre_data,
+        all_star_cast_data,
+        all_title_data
+    ])
     # Add base score to the main DataFrame - use a consistent name like 'base_score'
-    #movies_df['base_score'] = base_predictions.flatten()
+    movies_df['base_score'] = base_predictions.flatten()
     print("Base predictions calculated and added.")
 
     print("Artifacts loaded successfully.")
