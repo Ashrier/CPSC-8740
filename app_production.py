@@ -17,7 +17,7 @@ try:
     model = keras.models.load_model('movie_recommendation_model.h5')
     #scaler = joblib.load('scaler.pkl')
     #min_max_scaler = joblib.load('min_max_scaler.pkl')
-    #director_encoder = joblib.load('director_encoder.pkl')
+    director_encoder = joblib.load('director_encoder.pkl')
     #title_tokenizer = joblib.load('title_tokenizer.pkl')
 
     print("Loading tokenizer from JSON...")
