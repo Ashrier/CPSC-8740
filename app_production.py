@@ -17,7 +17,7 @@ try:
     #scaler = joblib.load('scaler.pkl')
     #min_max_scaler = joblib.load('min_max_scaler.pkl')
     #director_encoder = joblib.load('director_encoder.pkl')
-    #title_tokenizer = joblib.load('title_tokenizer.pkl')
+    title_tokenizer = joblib.load('title_tokenizer.pkl')
 
     #with open('actor_to_index.json', 'r') as f:
         #actor_to_index = json.load(f)
