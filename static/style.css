@@ -1,0 +1,174 @@
+/* --- Google Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@400;700&display=swap');
+
+/* --- Global Styles --- */
+body {
+    background-color: #1a1a1a; /* Dark background like a cinema */
+    color: #f0f0f0;           /* Light text color for contrast */
+    font-family: 'Lato', sans-serif; /* Clean sans-serif for readability */
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    display: flex;            /* Using flex to help center content */
+    flex-direction: column;
+    align-items: center;
+}
+
+/* --- Container for Centering --- */
+/* Apply this if you wrap your body content, or apply max-width directly to body/form */
+.container { /* You might need to add <div class="container"> around your form/h1/h2 */
+    max-width: 800px;
+    width: 90%;
+    background-color: #2a2a2a; /* Slightly lighter dark shade for the content area */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    margin-top: 20px;
+}
+
+
+/* --- Headings --- */
+h1, h2 {
+    font-family: 'Bebas Neue', cursive; /* Cinematic title font */
+    color: #ffd700;                 /* Gold color for headings */
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-family: 'Bebas Neue', cursive;
+    /* color: #ffd700; */ /* Consider changing color for better contrast */
+    color: #ffffff; /* White usually works well over images */
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+    font-size: 3em;
+    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); */ /* Keep or adjust shadow */
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8); /* Slightly stronger shadow for readability */
+
+    /* --- Add these background properties --- */
+    background-image: url("images/movie_theatre.jpg"); /* <--- CHANGE THIS PATH */
+    background-size: cover; /* Scales image to cover the entire h1 area */
+    background-position: center center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from tiling */
+
+    /* --- Optional: Add padding to give image space around text --- */
+    padding: 20px 10px; /* Add some top/bottom padding (adjust as needed) */
+    border-radius: 5px; /* Optional: round corners if desired */
+    /* --- Optional: Fallback background color --- */
+    /* background-color: #333; */ /* Shows if image fails to load */
+}
+
+
+h2 {
+    font-size: 2em;
+    margin-top: 40px; /* Space above Recommendations */
+    border-bottom: 1px solid #555; /* Subtle separator */
+    padding-bottom: 10px;
+}
+
+/* --- Form Styling --- */
+form {
+    margin-top: 20px;
+}
+
+/* --- Fieldsets & Legends (Grouping sections) --- */
+fieldset {
+    border: 1px solid #555; /* Subtle border */
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #333; /* Slightly different background for sections */
+}
+
+legend {
+    font-family: 'Bebas Neue', cursive; /* Title font for legends */
+    color: #ffd700;                 /* Gold color */
+    font-size: 1.6em;
+    padding: 0 10px;
+    margin-left: 10px; /* Align with fieldset padding */
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+/* --- Labels and Inputs --- */
+label {
+    display: block; /* Ensure labels take full width for text inputs */
+    margin-bottom: 12px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+/* Specific styling for checkbox/radio labels */
+fieldset label {
+    display: inline-block; /* Allow multiple checkboxes/radios per line */
+    margin-right: 15px;
+    margin-bottom: 10px; /* Consistent spacing */
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 8px;
+    vertical-align: middle; /* Align checkbox/radio with text */
+    cursor: pointer;
+    accent-color: #ffd700; /* Style the check/radio itself with gold (browser support varies) */
+}
+
+/* Style text inputs */
+input[type="text"] {
+    width: calc(100% - 22px); /* Full width minus padding */
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    background-color: #444; /* Darker input background */
+    color: #f0f0f0;         /* Light text */
+    font-size: 1em;
+    margin-bottom: 20px; /* Space below text inputs */
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #ffd700; /* Gold border on focus */
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Add some space above the text input labels if they follow fieldsets */
+label[for="actors"],
+label[for="directors"] {
+    margin-top: 15px;
+    font-weight: bold; /* Make these labels slightly more prominent */
+}
+
+
+/* --- Submit Button --- */
+button[type="submit"] {
+    display: block; /* Center button */
+    margin: 30px auto 0 auto; /* Center horizontally, add top margin */
+    padding: 12px 30px;
+    background-color: #ffd700; /* Gold background */
+    color: #1a1a1a;           /* Dark text for contrast */
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif; /* Use body font for button clarity */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+button[type="submit"]:hover {
+    background-color: #e6bf00; /* Slightly darker gold on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* --- Results Area --- */
+#results {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 5px;
+    min-height: 50px; /* Give it some initial height */
+    border: 1px solid #555;
+}

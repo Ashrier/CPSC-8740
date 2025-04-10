@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Movie Preferences</h1>
+    <form id="preference-form" method="post">
+        <fieldset>
+            <legend>What Genres do you enjoy?</legend>
+            <label><input type="checkbox" name="genre" value="Action"> Action</label>
+            <label><input type="checkbox" name="genre" value="Adventure"> Adventure</label>
+            <label><input type="checkbox" name="genre" value="Animation"> Animation</label>
+            <label><input type="checkbox" name="genre" value="Biography"> Biography</label>
+            <label><input type="checkbox" name="genre" value="Comedy"> Comedy</label>
+            <label><input type="checkbox" name="genre" value="Crime"> Crime</label>
+            <label><input type="checkbox" name="genre" value="Drama"> Drama</label>
+            <label><input type="checkbox" name="genre" value="Family"> Family</label>
+            <label><input type="checkbox" name="genre" value="Fantasy"> Fantasy</label>
+            <label><input type="checkbox" name="genre" value="History"> History</label>
+            <label><input type="checkbox" name="genre" value="Horror"> Horror</label>
+            <label><input type="checkbox" name="genre" value="Musical"> Musical</label>
+            <label><input type="checkbox" name="genre" value="Mystery"> Mystery</label>
+            <label><input type="checkbox" name="genre" value="Noir"> Noir</label>
+            <label><input type="checkbox" name="genre" value="Romance"> Romance</label>
+            <label><input type="checkbox" name="genre" value="Sci-Fi"> Sci-Fi</label>
+            <label><input type="checkbox" name="genre" value="Thriller"> Thriller</label>
+            <label><input type="checkbox" name="genre" value="War"> War</label>
+            <label><input type="checkbox" name="genre" value="Western"> Western</label>
+            </fieldset>
+
+        <fieldset>
+            <legend>Do you prefer older classics or newer releases?</legend>
+            <label><input type="radio" name="era" value="Older Classics (Pre-1980)" checked> Pre-1980</label>
+            <label><input type="radio" name="era" value="In Between (1980-2000)"> 1980-2000</label>
+            <label><input type="radio" name="era" value="Newer Releases (Post-2000)"> Post-2000</label>
+             <label><input type="radio" name="era" value="All of the above - no preference"> No Preference</label>
+       </fieldset>
+
+        <fieldset>
+             <legend>Do you prefer shorter movies or longer epics?</legend>
+             <label><input type="radio" name="length" value="Shorter movies (~100 minutes or less)" checked> Shorter (~100 min or less)</label>
+             <label><input type="radio" name="length" value="Longer epics (~120 minutes or longer)"> Longer (~120 min or more)</label>
+             <label><input type="radio" name="length" value="All of the above - no preference"> No Preference</label>
+        </fieldset>
+
+        <label for="actors">Any favorite actors? (comma-separated):</label>
+        <input type="text" id="actors" name="actors"><br><br>
+
+        <label for="directors">Any favorite directors? (comma-separated):</label>
+        <input type="text" id="directors" name="directors"><br><br>
+
+        <button type="submit">Get Recommendations</button>
+    </form>
+
+    <h2>Recommendations</h2>
+    <div id="results">
+        </div>
+
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
