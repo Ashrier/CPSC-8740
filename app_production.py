@@ -6,7 +6,7 @@ from tensorflow import keras
 from flask import Flask, request, jsonify, render_template # render_template serves the HTML
 # Import any other necessary sklearn modules if needed for helper functions
 # from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler etc. (if needed directly here)
-from keras.preprocessing.sequence import pad_sequences # Needed if regenerating sequences
+from tensorflow.keras.preprocessing.sequence import pad_sequences # Needed if regenerating sequences
 
 # ==============================================================================
 #  Load Artifacts ONCE when the application starts
