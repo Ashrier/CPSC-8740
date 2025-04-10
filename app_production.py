@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify, render_template # render_template ser
 # Import any other necessary sklearn modules if needed for helper functions
 # from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler etc. (if needed directly here)
 from tensorflow.keras.preprocessing.sequence import pad_sequences # Needed if regenerating sequences
+from tensorflow.keras.preprocessing.text import tokenizer_from_json # Needed if regenerating sequences
 
 # ==============================================================================
 #  Load Artifacts ONCE when the application starts
@@ -17,22 +18,38 @@ try:
     #scaler = joblib.load('scaler.pkl')
     #min_max_scaler = joblib.load('min_max_scaler.pkl')
     #director_encoder = joblib.load('director_encoder.pkl')
-    title_tokenizer = joblib.load('title_tokenizer.pkl')
+    #title_tokenizer = joblib.load('title_tokenizer.pkl')
 
-    #with open('actor_to_index.json', 'r') as f:
-        #actor_to_index = json.load(f)
-    #all_actors = np.load('all_actors.npy', allow_pickle=True).tolist()
-    #with open('genre_columns.json', 'r') as f:
-        #genre_columns = json.load(f) # Needed for process_preferences & apply_filtering
+    print("Loading tokenizer from JSON...")
+    try: # Add try/except around file loading
+        with open('title_tokenizer.json', 'r', encoding='utf-8') as f:
+            # Load the outer JSON structure (which contains the config string)
+            tokenizer_json_str = json.load(f)
+            # Recreate the tokenizer object from the configuration string
+            title_tokenizer = tokenizer_from_json(tokenizer_json_str)
+        print("Tokenizer loaded successfully from JSON.")
+    except FileNotFoundError:
+        print("ERROR: title_tokenizer.json not found!")
+        # Handle error appropriately - maybe raise it to stop startup
+        raise
+    except Exception as e:
+        print(f"ERROR loading tokenizer from JSON: {e}")
+        raise # Reraise to see the error in logs
+
+    with open('actor_to_index.json', 'r') as f:
+        actor_to_index = json.load(f)
+    all_actors = np.load('all_actors.npy', allow_pickle=True).tolist()
+    with open('genre_columns.json', 'r') as f:
+        genre_columns = json.load(f) # Needed for process_preferences & apply_filtering
 
     # Load preprocessed movie data
     # Use the final preprocessed CSV that includes necessary columns
-    movies_df = pd.read_csv("neural_net_ready_preprocessed_movies.csv") # Make sure path is correct
+    #movies_df = pd.read_csv("neural_net_ready_preprocessed_movies.csv") # Make sure path is correct
 
     # --- Recreate/Load necessary feature columns for prediction ---
     # (Do this once at startup)
     #if 'Director_Encoded' not in movies_df.columns:
-    #     movies_df['Director_Encoded'] = director_encoder.transform(movies_df['Director'])
+         #movies_df['Director_Encoded'] = director_encoder.transform(movies_df['Director'])
 
     # Assuming title_data (padded_sequences) is needed and not in CSV
     #sequences = title_tokenizer.texts_to_sequences(movies_df['Title'])
@@ -42,7 +59,7 @@ try:
     # Ensure 'Star Cast List Clean' column exists or recreate it first
     #if 'Star Cast List Clean' not in movies_df.columns:
         # You might need more preprocessing steps here if this column isn't saved
-    #    raise ValueError("Column 'Star Cast List Clean' not found in preprocessed CSV.")
+        #raise ValueError("Column 'Star Cast List Clean' not found in preprocessed CSV.")
         # If it is saved but as a string:
         # movies_df['Star Cast List Clean'] = movies_df['Star Cast List Clean'].apply(eval)
 
@@ -63,7 +80,7 @@ try:
     #num_movies = len(movies_df)
 
     # --- Calculate Base Predictions using Generic User ID (ONCE) ---
-    #print("Calculating base predictions...")
+    print("Calculating base predictions...")
     #generic_user_id = 0
     #generic_user_array = np.array([generic_user_id] * num_movies)
     #movie_id_array = np.arange(num_movies) # Assuming movie embedding uses index
