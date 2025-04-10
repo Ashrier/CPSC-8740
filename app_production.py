@@ -14,16 +14,16 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences # Needed if re
 print("Loading application artifacts...")
 try:
     model = keras.models.load_model('movie_recommendation_model.h5')
-    scaler = joblib.load('scaler.pkl')
-    min_max_scaler = joblib.load('min_max_scaler.pkl')
-    director_encoder = joblib.load('director_encoder.pkl')
-    title_tokenizer = joblib.load('title_tokenizer.pkl')
+    #scaler = joblib.load('scaler.pkl')
+    #min_max_scaler = joblib.load('min_max_scaler.pkl')
+    #director_encoder = joblib.load('director_encoder.pkl')
+    #title_tokenizer = joblib.load('title_tokenizer.pkl')
 
-    with open('actor_to_index.json', 'r') as f:
-        actor_to_index = json.load(f)
-    all_actors = np.load('all_actors.npy', allow_pickle=True).tolist()
-    with open('genre_columns.json', 'r') as f:
-        genre_columns = json.load(f) # Needed for process_preferences & apply_filtering
+    #with open('actor_to_index.json', 'r') as f:
+        #actor_to_index = json.load(f)
+    #all_actors = np.load('all_actors.npy', allow_pickle=True).tolist()
+    #with open('genre_columns.json', 'r') as f:
+        #genre_columns = json.load(f) # Needed for process_preferences & apply_filtering
 
     # Load preprocessed movie data
     # Use the final preprocessed CSV that includes necessary columns
