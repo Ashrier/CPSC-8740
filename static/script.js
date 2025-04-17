@@ -86,7 +86,7 @@ form.addEventListener('submit', async (event) => {
                 // Adjust key based on what Flask returns ('base_score' or 'predicted_liking')
                 const scoreKey = 'base_score' in movie ? 'base_score' : 'predicted_liking';
                 const scorePercentage = (movie[scoreKey] * 100).toFixed(1);
-                html += `<li>${movie.Title} (Likelihood: ${scorePercentage}%)</li>`;
+                html += `<li>${movie.Title}</li>`;
             });
             html += '</ul>';
             resultsDiv.innerHTML = html;
